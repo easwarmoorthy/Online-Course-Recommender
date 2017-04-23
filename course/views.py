@@ -34,11 +34,22 @@ def login_view(request):
 
 def rating_view(request,pk):
 	searchform = SearchForm(request.POST or None)
-	list2 = CourseModel.objects.get(pk=pk)
+	list2 = CourseModel.objects.all()
+	userkey = request.session['member_id']
+	my_record = CoursereviewModel.objects.filter(user = userkey)[0].course.objects.filter(id = pk)[0]
+	print my_record
+	rating = 0
 	try:
 		if request.session['member_id']:
 			if searchform.is_valid():
 				keyword = searchform.cleaned_data.get("keyword")
+				data_list = CoursereviewModel(instance=my_record)
+				data_list.user =  User.objects.filter(id = userkey)[0]
+				data_list.rating = rating
+				data_list.review = keyword
+				data_list.course = CourseModel.objects.filter(id = pk)[0]
+				data_list.save()
+				print data_list
 				list1 = CourseModel.objects.all()
 				context = {"list1":list1}
 				return render(request, "course/all.html", context)

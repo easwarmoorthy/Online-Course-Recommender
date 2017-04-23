@@ -32,9 +32,22 @@ def login_view(request):
 			return render(request, "course/form.html", context)
 	return render(request, "course/form.html", context)
 
-def rating_view(request):
-    
-    pass
+def rating_view(request,pk):
+	searchform = SearchForm(request.POST or None)
+	list2 = CourseModel.objects.get(pk=pk)
+	try:
+		if request.session['member_id']:
+			if searchform.is_valid():
+				keyword = searchform.cleaned_data.get("keyword")
+				list1 = CourseModel.objects.all()
+				context = {"list1":list1}
+				return render(request, "course/all.html", context)
+		context = {"list2":list2,"form":searchform}
+		return render(request, "course/rating.html", context)
+	except KeyError:
+		form = "Please login to proceed"
+		return render(request,"course/index.html",{"form":form})
+
 
 def allquotes_view(request):
 	list1 = CourseModell.objects.all()

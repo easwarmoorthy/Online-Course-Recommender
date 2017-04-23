@@ -11,6 +11,9 @@
 <a href="{{x.homepage}}">{{x.title}}</a></div>
 <div class="qname">
 <p> {{x.short_summary}} </p> </div>
+<form action="/{{x.id}}/rating/">
+    <input type="submit" value="Add Ratings" />
+</form>
 </div>
 <hr>
 {% endfor %}

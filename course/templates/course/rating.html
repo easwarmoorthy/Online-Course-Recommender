@@ -1,2 +1,14 @@
 {% block content%}
+<p> {{list2.title}} </p>
+<form method="POST" action=''>{% csrf_token %}
+{{form}}
+<br>
+<p>Rating</p>
+<input type = "radio" name = "choice" id = "1"></input>
+<input type = "radio" name = "choice" id = "2"></input>
+<input type = "radio" name = "choice" id = "3"></input>
+<input type = "radio" name = "choice" id = "4"></input>
+<input type = "radio" name = "choice" id = "5"></input>
+<p class="submit"><input type="submit"></input></p>
+</form>
 {% endblock content%}

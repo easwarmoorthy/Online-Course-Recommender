@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^logout/',logout_view,name='logout'),
     url(r'^register/',register_view,name='register'),
-    url(r'^rating/',rating_view,name='rating'),
+    url(r'^(?P<pk>[0-9]+)/rating/',rating_view,name='rating'),
     url(r'^login',login_view,name='login'),
     url(r'^user',user_view,name='userview'),
 ]

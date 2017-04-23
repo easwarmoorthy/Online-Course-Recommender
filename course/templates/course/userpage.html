@@ -1,0 +1,31 @@
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/quoteapp/style2.css"/>
+<link href="/static/quoteapp/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<ul class="nav nav-tabs">
+  <li role="presentation"><a href="/all/">All Quotes</a></li>
+  <li role="presentation"><a href="/quote/">Add Quotes</a></li>
+  <li role="presentation"><a href="/user/">User</a></li>
+  <li role="presentation"><a href="/search/">Search</a></li>
+  <li role="presentation"><a href="/logout/">Logout</a></li>
+</ul>
+<title>{{title}}</title>
+{% for x in list1%}
+<div class="item">
+  <div class="quote">
+<p> {{x.quote}} </p></div>
+<div class="qname">
+<p> {{x.qname}} </p>
+<p> {{x.quser}}</p> </div>
+<div class="qw">
+  <form action="/edit/{{x.id}}/">
+    <input type="submit" name = "{{x.id}}" value="Edit"/>
+  </form>
+  <form action="/delete/{{x.id}}/">
+    <input type="submit" name = "{{x.id}}" value="Delete"/>
+  </form>
+</div>
+</div>
+{% endfor %}
+{% endblock content%}

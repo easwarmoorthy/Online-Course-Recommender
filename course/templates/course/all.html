@@ -1,0 +1,18 @@
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/quoteapp/style2.css" />
+<link rel="stylesheet" type="text/css" href="/static/quoteapp/style.css" />
+<link href="/static/quoteapp/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+{% for x in list1%}
+<div class="item">
+  <div class="quote">
+<a href="{{x.homepage}}">{{x.title}}</a></div>
+<div class="qname">
+<p> {{x.short_summary}} </p> </div>
+</div>
+<hr>
+{% endfor %}
+
+{% endblock content%}

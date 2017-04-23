@@ -1,0 +1,10 @@
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="/static/quoteapp/style.css" />
+<div class="login">
+  <p>{{form}}</p><br/>
+  <form action="/login/">
+    <input type="submit" value="Click here to Login" />
+  </form>
+</div>
+{% endblock content%}

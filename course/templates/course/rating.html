@@ -1,14 +1,16 @@
 {% block content%}
 <p> {{list2.title}} </p>
 <form method="POST" action=''>{% csrf_token %}
-{{form}}
+{% for field in form %}
+<input type="text" id = "id_{{field.keyword}}"  name="{{field.name}}" value="{{field.form.initial.label}}" />
+{% endfor %}
 <br>
 <p>Rating</p>
-<input type = "radio" name = "rating" id = "1"></input>
-<input type = "radio" name = "rating" id = "2"></input>
-<input type = "radio" name = "rating" id = "3"></input>
-<input type = "radio" name = "rating" id = "4"></input>
-<input type = "radio" name = "rating" id = "5"></input>
+<input type = "radio" name = "rating" id = "1" value="1"></input>
+<input type = "radio" name = "rating" id = "2" value="2"></input>
+<input type = "radio" name = "rating" id = "3" value="3"></input>
+<input type = "radio" name = "rating" id = "4" value="4"></input>
+<input type = "radio" name = "rating" id = "5" value="5"></input>
 <p class="submit"><input type="submit"></input></p>
 </form>
 {% endblock content%}

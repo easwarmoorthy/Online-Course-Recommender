@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 # Create your views here.
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from math import sqrt
 from django.contrib.auth import(
 	authenticate,
@@ -53,7 +56,7 @@ def pearson_correlation(person1,person2):
 	product_sum_of_both_users = 0
 	for item in person1:
 		for x in person2:
-			if item.course == x.course:
+			if x.course != item.course:
 				product_sum_of_both_users += x.rating*item.rating
 	print product_sum_of_both_users
 	# Calculate the pearson score
@@ -86,8 +89,11 @@ def recommendation(request):
 				other_data = CoursereviewModel.objects.all().filter(user_id = other.id)
 				print other_data,"\n",person
 				for item in other_data:
+					find = False
 					for x in person:
 						if item.course_id == x.course_id:
+							find = True
+						if(not find):
 							totals.setdefault(item,0)
 							totals[item] += item.rating* sim
 							# sum of similarities
@@ -99,12 +105,22 @@ def recommendation(request):
 			rankings.reverse()
 			# returns the recommended items
 			recommendations_list = [recommend_item for score,recommend_item in rankings]
-			list1 = []
+			list2 = []
 			for x in recommendations_list:
-				list1.append(x.course)
-			list1 = list(set(list1))
+				list2.append(x.course)
+			list2 = list(set(list2))
+			res_list = list2
+			paginator = Paginator(res_list, 7) # Show 25 contacts per page
+			page = request.GET.get('page')
+			try:
+			    list1 = paginator.page(page)
+			except PageNotAnInteger:
+			# If page is not an integer, deliver first page.
+			    list1 = paginator.page(1)
+			except EmptyPage:
+			# If page is out of range (e.g. 9999), deliver last page of results.
+			    list1= paginator.page(paginator.num_pages)
 			context = {"list1":list1}
-			print list1
 			return render(request, "course/all.html", context)
 			# Sort the similar persons so that highest scores person will appear at the first
 	except KeyError:
@@ -125,9 +141,7 @@ def login_view(request):
 		login(request,user)
 		request.session['member_id'] = user.id
 		if user.is_authenticated():
-			list1 = CourseModel.objects.all()
-			context = {"form":form ,"list1":list1,"title":title}
-			return render(request, "course/all.html", context)
+			return HttpResponseRedirect('/all/')
 		else:
 			return render(request, "course/form.html", context)
 	return render(request, "course/form.html", context)
@@ -139,13 +153,14 @@ def rating_view(request,pk):
 	try:
 		user =  User.objects.filter(id = userkey)[0]
 		course = CourseModel.objects.filter(id = pk)[0]
-		my_record= ""
+		my_record= {"label":""}
+		one,two,three,four,five = "","","","",""
 		d = CoursereviewModel.objects.all().filter(user_id = user.id)
 		for x in d:
-			print x.course_id
 			if str(x.course_id) == str(pk):
 				edit = True
-				my_record = x.review
+				my_record["label"] = x.review
+				rating = x.rating
 	except IndexError:
 		pass
 	searchform = SearchForm(request.POST or None,initial = { 'label':my_record})
@@ -163,10 +178,20 @@ def rating_view(request,pk):
 				data_list.review = keyword
 				data_list.course = CourseModel.objects.filter(id = pk)[0]
 				data_list.save()
-				print data_list
-				list1 = CourseModel.objects.all()
+				res_list = CourseModel.objects.all()
+				paginator = Paginator(res_list, 10) # Show 25 contacts per page
+				page = request.GET.get('page')
+				list2 =  []
+				try:
+				    list1 = paginator.page(page)
+				except PageNotAnInteger:
+				# If page is not an integer, deliver first page.
+				    list1 = paginator.page(1)
+				except EmptyPage:
+				# If page is out of range (e.g. 9999), deliver last page of results.
+				    list1= paginator.page(paginator.num_pages)
 				context = {"list1":list1}
-				return render(request, "course/all.html", context)
+				return HttpResponseRedirect('/all/')
 			elif searchform.is_valid():
 				rating = int(request.POST.get("rating"))
 				user =  User.objects.filter(id = userkey)[0]
@@ -179,9 +204,20 @@ def rating_view(request,pk):
 						print type(keyword),type(x.review)
 						x.review = keyword
 						CoursereviewModel.objects.all().filter(user_id = user.id).filter(course_id = pk).update(review = keyword,rating = rating)
-				list1 = CourseModel.objects.all()
+				res_list = CourseModel.objects.all()
+				paginator = Paginator(res_list, 10) # Show 25 contacts per page
+				page = request.GET.get('page')
+				list2 =  []
+				try:
+				    list1 = paginator.page(page)
+				except PageNotAnInteger:
+				# If page is not an integer, deliver first page.
+				    list1 = paginator.page(1)
+				except EmptyPage:
+				# If page is out of range (e.g. 9999), deliver last page of results.
+				    list1= paginator.page(paginator.num_pages)
 				context = {"list1":list1}
-				return render(request, "course/all.html", context)
+				return HttpResponseRedirect('/all/')
 		context = {"list2":list2,"form":searchform}
 		return render(request, "course/rating.html", context)
 	except KeyError:
@@ -189,69 +225,29 @@ def rating_view(request,pk):
 		return render(request,"course/index.html",{"form":form})
 
 
-def allquotes_view(request):
-	list1 = CourseModell.objects.all()
+def allcourse_view(request):
+	list1 = CourseModel.objects.all()
 	context = {"list1":list1}
 	try:
 		if request.session['member_id']:
-			return render(request,"course/all.html",context)
+			res_list = CourseModel.objects.all()
+			paginator = Paginator(res_list, 10) # Show 25 contacts per page
+			page = request.GET.get('page')
+			list2 =  []
+			try:
+			    list1 = paginator.page(page)
+			except PageNotAnInteger:
+			# If page is not an integer, deliver first page.
+			    list1 = paginator.page(1)
+			except EmptyPage:
+			# If page is out of range (e.g. 9999), deliver last page of results.
+			    list1= paginator.page(paginator.num_pages)
+			context = {"list1":list1}
+			return render(request, "course/all.html", context)
 	except KeyError:
 		form = "Please login to proceed"
 		return render(request,"course/index.html",{"form":form})
 
-def quote_view(request):
-	#form = MyModelForm(instance=my_record)
-	form = QuoteForm(request.POST or None)
-	msg = None
-	try:
-		if request.session['member_id']:
-			if form.is_valid():
-				quote = form.cleaned_data["quote"]
-				qname = form.cleaned_data["qname"]
-				new_quote = form.save(commit=False)
-				new_quote.user_id = request.session['member_id']
-				new_quote.save()
-				msg = {"quote":quote,"qname":qname}
-			context = {"form":form,"msg":msg}
-			return render(request,"course/quote.html",context)
-	except KeyError:
-		form = "Please login to proceed"
-		return render(request,"course/index.html",{"form":form})
-
-def edit_view(request,pk):
-	my_record = CourseModel.objects.get( id = pk)
-	#form = MyModelForm(instance=my_record)
-	form = QuoteForm(request.POST or None,instance=my_record)
-	msg = None
-	try:
-		if request.session['member_id']:
-			if form.is_valid():
-				quote = form.cleaned_data["quote"]
-				qname = form.cleaned_data["qname"]
-				#Entry.objects.filter(pub_date__year=2010).update(comments_on=False, headline='This is old')
-				CourseModel.objects.filter(id = pk).update(quote=quote,qname = qname)
-				#CourseModel.objects.filter(pk=quote.pk).update(active=True)
-				msg = {"quote":quote,"qname":qname}
-				print msg
-			context = {"form":form,"msg":msg}
-			return render(request,"course/quote.html",context)
-	except KeyError:
-		form = "Please login to proceed"
-		return render(request,"course/index.html",{"form":form})
-
-def delete_view(request,pk):
-	my_record = CourseModel.objects.filter( id = pk).delete()
-	cuser = request.session['member_id']
-	x = User.objects.get(id = cuser)
-	title = x.username
-	list1 = CourseModel.objects.all().filter( user__username = x.username)
-	context = {"list1":list1}
-	try:
-		if request.session['member_id']:
-			return render(request,"course/userpage.html",context)
-	except KeyError:
-		form = "Please login to proceed"
-		return render(request,"course/index.html",{"form":form})
 
 def user_view(request):
 	cuser = request.session['member_id']
@@ -287,9 +283,7 @@ def register_view(request):
 		user.set_password(password)
 		user.save()
 		login(request,user)
-		list1 = CourseModel.objects.all()
-		context = {"form":form ,"list1":list1,"title":title}
-		return render(request, "course/all.html", context)
+		return HttpResponseRedirect('/all/')
 	context = {"form":form ,"list1":list1,"title":title}
 	return render(request,"course/form.html",{"form":form})
 

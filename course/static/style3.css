@@ -1,0 +1,38 @@
+.item
+{
+  margin:0 auto;
+  width:500px;
+  padding: 20px;
+}
+body
+{
+  background-color:whitesmoke;
+}
+input
+{
+  color:#666;
+  border: 1px solid;
+  border-color: #666;
+  background-color: inherit;
+  font-size: 14px;
+  padding: 5px;
+  width:50%;
+  margin-right:50%;
+  margin-bottom: 20px;
+}
+input:hover
+{
+  color: #333;
+  border-color: #444;
+  border: 1px solid;
+  border-style:double;
+  border-style: dotted;
+}
+input:focus
+{
+  color: #333;
+  border-color: #444;
+  border: 1px solid;
+  border-style:double;
+  border-style: dotted;
+}

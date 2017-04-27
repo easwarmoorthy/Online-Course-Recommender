@@ -1,13 +1,25 @@
 {% block content %}
 {% load static %}
+
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/quoteapp/style2.css" />
-<link rel="stylesheet" type="text/css" href="/static/quoteapp/style.css" />
-<link href="/static/quoteapp/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="/static/style1.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+</script>
+
 <title> CourseMatch </title>
+<body>
+<div class="item2">
+  <form method="" action="/recommendation/">
+    <input  type = "submit" value="Recommendation"/>
+  </form>
+  <form method="" action="/all/">
+    <input  type = "submit" value="View Courses"/>
+  </form>
+</div>
 {% for x in list1%}
-<div class="item">
-  <div class="quote">
+<div id="w" class="item">
+  <div class="course_name">
 <a href="{{x.homepage}}">{{x.title}}</a></div>
 <div class="qname">
 <p> {{x.short_summary}} </p> </div>
@@ -15,7 +27,20 @@
     <input type="submit" value="Add Ratings" />
 </form>
 </div>
-<hr>
 {% endfor %}
+<nav aria-label="Page navigation example">
+  <div class="pagination">
+    {% if list1.has_previous %}
+    <div class="page-item"><a href="?page={{ list1.previous_page_number }}">Previous</a></div>
+            {% endif %}
+    <div class="page-item"><span class="current">
+        Page {{ list1.number }} of {{ list1.paginator.num_pages }}.
+    </span></div>
 
+    {% if list1.has_next %}
+        <div class="page-item"><a href="?page={{ list1.next_page_number }}">Next</a></div>
+    {% endif %}
+  </div>
+</nav>
+</body>
 {% endblock content%}

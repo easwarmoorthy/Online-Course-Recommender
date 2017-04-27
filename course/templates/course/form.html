@@ -1,31 +1,18 @@
 {% block content %}
 {% load static %}
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/quoteapp/style.css" />
-<link rel="stylesheet" type="text/css" href="/static/quoteapp/style2.css" />
+<link rel="stylesheet" type="text/css" href="/static/style3.css" />
 <link href="/static/quoteapp/css/bootstrap.min.css" rel="stylesheet" media="screen">
-{% if title != "Login" %}
-<ul class="nav nav-tabs">
-  <li role="presentation"><a href="/all/">All Quotes</a></li>
-  <li role="presentation"><a href="/quote/">Add Quotes</a></li>
-  <li role="presentation"><a href="/user/">User</a></li>
-  <li role="presentation"><a href="/search/">Search</a></li>
-  <li role="presentation"><a href="/logout/">Logout</a></li>
-</ul>
-{% endif %}
-<div class="login">
-  <title="{{title}}"></title>
-<h1> {{title}} </h1>
+<div class="item">
 <form method="POST" action=''>{% csrf_token %}
 {{form}}
-<p class="submit"><input type="submit"></input></p>
+<input type="submit"></input></p>
 </form>
 </div>
-{% ifequal title "Login" %}
-<div class="login log">
+<div class="item">
   <h4>Register if you are not a user.</h4>
   <form action="/register/">
     <input class = "submit" type="submit" value="Register" />
   </form>
-  {%endifequal%}
+</div>
 {% endblock content%}

@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/rating/',rating_view,name='rating'),
     url(r'^login',login_view,name='login'),
     url(r'^user',user_view,name='userview'),
+    url(r'^all/',allcourse_view,name='all'),
     url(r'^recommendation',recommendation,name='recommendation'),
 ]

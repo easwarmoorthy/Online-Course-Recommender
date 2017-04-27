@@ -1,16 +1,19 @@
 {% block content%}
-<p> {{list2.title}} </p>
+<link rel="stylesheet" type="text/css" href="/static/style2.css" />
+<div class="item">
 <form method="POST" action=''>{% csrf_token %}
 {% for field in form %}
-<input type="text" id = "id_{{field.keyword}}"  name="{{field.name}}" value="{{field.form.initial.label}}" />
+<p>Review </p>
+<input id = "review" type="text" name="{{field.name}}" value="{{field.form.initial.label.label}}"  />
 {% endfor %}
 <br>
 <p>Rating</p>
-<input type = "radio" name = "rating" id = "1" value="1"></input>
-<input type = "radio" name = "rating" id = "2" value="2"></input>
-<input type = "radio" name = "rating" id = "3" value="3"></input>
-<input type = "radio" name = "rating" id = "4" value="4"></input>
-<input type = "radio" name = "rating" id = "5" value="5"></input>
+<input type = "radio" name = "rating" id = "checks[]" value="1" checked></input>
+<input type = "radio" name = "rating" id = "checks[]" value="2" ></input>
+<input type = "radio" name = "rating" id = "checks[]" value="3"  ></input>
+<input type = "radio" name = "rating" id = "checks[]" value="4" ></input>
+<input type = "radio" name = "rating" id = "checks[]" value="5" ></input>
 <p class="submit"><input type="submit"></input></p>
 </form>
+</div>
 {% endblock content%}

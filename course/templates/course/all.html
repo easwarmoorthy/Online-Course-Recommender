@@ -2,39 +2,39 @@
 {% load static %}
 
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/style1.css" />
+<link rel="stylesheet" type="text/css" href="/static/allcourses.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 </script>
 
 <title> CourseMatch </title>
 <body>
-  <body>
     <div class="top">
         <div class="sitename">
         <h2> Course Match </h2>
         </div>
         <div class="navlink">
-            <form method="" action="/recommendation/">
-              <input  type = "submit" value="Recommendation"/>
-            </form>
-            <form method="" action="/all/">
-              <input  type = "submit" value="View Courses"/>
-            </form>
+            <a href = "/recommendation/">Recommendation</a>
+          </div>
+          <div class="navlink">
+            <a href = "/all/"> View Courses </a>
         </div>
   </div>
-
+<div class="content">
 {% for x in list1%}
-<div id="w" class="item">
+<div class="item">
   <div class="course_name">
-<a href="{{x.homepage}}">{{x.title}}</a></div>
-<div class="qname">
-<p> {{x.short_summary}} </p> </div>
-<form action="/{{x.id}}/rating/">
-    <input type="submit" value="Add Ratings" />
-</form>
+    <a href="{{x.homepage}}">{{x.title}}</a>
+  </div>
+  <div class="qname">
+  <p> {{x.short_summary}} </p>
+  </div>
+  <form action="/{{x.id}}/rating/">
+      <input type="submit" value="Add Ratings" />
+  </form>
 </div>
 {% endfor %}
+
 <nav aria-label="Page navigation example">
   <div class="pagination">
     {% if list1.has_previous %}
@@ -49,5 +49,6 @@
     {% endif %}
   </div>
 </nav>
+</div>
 </body>
 {% endblock content%}

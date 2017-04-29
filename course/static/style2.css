@@ -38,3 +38,8 @@ input:focus
   border-style:double;
   border-style: dotted;
 }
+a
+{
+  text-decoration: none;
+  color:black;
+}

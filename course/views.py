@@ -109,6 +109,9 @@ def recommendation(request):
 			for x in recommendations_list:
 				list2.append(x.course)
 			list2 = list(set(list2))
+			for item in list2:
+				for item.course in person:
+					pass
 			res_list = list2
 			paginator = Paginator(res_list, 7) # Show 25 contacts per page
 			page = request.GET.get('page')

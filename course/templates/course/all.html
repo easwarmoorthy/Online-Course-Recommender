@@ -9,14 +9,21 @@
 
 <title> CourseMatch </title>
 <body>
-<div class="item2">
-  <form method="" action="/recommendation/">
-    <input  type = "submit" value="Recommendation"/>
-  </form>
-  <form method="" action="/all/">
-    <input  type = "submit" value="View Courses"/>
-  </form>
-</div>
+  <body>
+    <div class="top">
+        <div class="sitename">
+        <h2> Course Match </h2>
+        </div>
+        <div class="navlink">
+            <form method="" action="/recommendation/">
+              <input  type = "submit" value="Recommendation"/>
+            </form>
+            <form method="" action="/all/">
+              <input  type = "submit" value="View Courses"/>
+            </form>
+        </div>
+  </div>
+
 {% for x in list1%}
 <div id="w" class="item">
   <div class="course_name">

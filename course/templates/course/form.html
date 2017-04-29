@@ -1,18 +1,38 @@
 {% block content %}
 {% load static %}
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/style3.css" />
+<link rel="stylesheet" type="text/css" href="/static/form.css" />
 <link href="/static/quoteapp/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<div class="item">
-<form method="POST" action=''>{% csrf_token %}
-{{form}}
-<input type="submit"></input></p>
-</form>
+<title> CourseMatch </title>
+<body>
+
+  <div class="top">
+    <div class="sitename">
+    <h2> Course Match </h2>
+  </div>
+    <div class="register">
+        <form action="/register/">
+          <input class = "submit" type="submit" value="Register" />
+        </form>
+    </div>
+  </div>
+
+  <div class="content">
+  <div class="userform">
+    <form method="POST" action=''>{% csrf_token %}
+      <div class="userpass">
+        <label for="id_username">Username</label>
+        <input class="input-name" id="id_username" maxlength="16" name="username" type="text" required="">
+        <label for="id_password">Password</label>
+        <input class="input-name" id="id_password" name="password" type="password" required="">
+    </div>
+    <div class="sub">
+      <input type="submit"></input>
+    </div>
+    </form>
+  </div>
+
+
 </div>
-<div class="item">
-  <h4>Register if you are not a user.</h4>
-  <form action="/register/">
-    <input class = "submit" type="submit" value="Register" />
-  </form>
-</div>
+</body>
 {% endblock content%}

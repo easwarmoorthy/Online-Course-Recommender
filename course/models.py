@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 from django.core.validators import URLValidator
 # Create your models here.
-from elasticsearchapp.search import CourseModelIndex
 
 
 class CourseModel(models.Model):
@@ -25,12 +24,3 @@ class CoursereviewModel(models.Model):
     user = models.ForeignKey(User,default = 'moorthy')
     def __str__(self):
         return "{0}".format(self.user)
-def indexing(self):
-   obj = CourseModelIndex(
-      meta={'id': self.id},
-      title=self.author.title,
-      short_summary=self.short_summary,
-      summary=self.summary
-   )
-   obj.save()
-   return obj.to_dict(include_meta=True)

@@ -229,4 +229,4 @@ def logout_view(request):
 	except KeyError:
 		pass
 	form = "Logged out successfully"
-	return render(request,"course/index.html",{"form":form})
+	return render(request,"/login/",{"form":form})

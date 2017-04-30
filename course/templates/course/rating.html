@@ -16,7 +16,9 @@
   <form method="POST" action=''>{% csrf_token %}
     {% for field in form %}
     <p>Review </p>
-    <textarea class="review" name="{{field.name}}" value="{{field.form.initial.previous_data.review}}"></textarea>
+    <div class="review">
+    <input class="review" type="text" name="{{field.name}}" value="{{field.form.initial.previous_data.review}}"  />
+  </div>
     {% endfor %}
     <p>Rating</p>
 
@@ -25,9 +27,9 @@
     checked
     {%endif%}> </input>
     {% endfor %}
-
+    <div>
     <input class="submit" type="submit"></input>
-
+  </div>
   </form>
 </div>
 {% endblock content%}

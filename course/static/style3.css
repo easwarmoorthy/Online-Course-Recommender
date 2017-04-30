@@ -5,18 +5,50 @@
   background-color: white;
   margin-top: 100px;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 20px;
   box-shadow: 0 0 4px rgba(0, 0, 0, .07), 0 0px 8px rgba(0, 0, 0, .14);
 }
-.review
+.review input
 {
+  width:240px;
+  text-align: left;
+  padding: 5px;
+  background-color: inherit;
+  font-size: 20px;
+  height: 32px;
+  border: 1px solid;
+  /*
+  border: 2px solid white ;
+  border-radius: 5px;
+  */
+}
+.userpass input:focus
+{
+  background-color: inherit;
+}
+.userpass input:active
+{
+  background-color: inherit;
 }
 .rating
 {
 
 }
-input[type = text]
+label
 {
-  width: 300px;
-  height: 100px;
+  font-size: 16px;
+}
+input[type = submit]
+{
+  text-align: center;
+  padding: 5px;
+  background-color: #02C39A;
+  font-size: 18px;
+  border:1px solid black;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .07), 0 0px 8px rgba(0, 0, 0, .14);
+  margin-top: 16px;
+}
+p
+{
+  font-size: 18px;
 }

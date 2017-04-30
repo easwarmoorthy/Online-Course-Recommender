@@ -25,7 +25,7 @@ SECRET_KEY = '^oiwne34y*=e@&cowb_r58f1!11wlpdm!hdtlgf9yphp#_on(-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['coursematch01.herokuapp.com','127.0.0.1']
 
 
 # Application definition

@@ -13,6 +13,19 @@ body
   height: 70px;
   background-color: black;
 }
+.title
+{
+  display: block;
+  width:300px;
+  background-color: red;
+  margin: 0 auto;
+}
+.navlink .active
+{
+  border: 1px solid white;
+  background-color: #02C39A;
+  color:black;
+}
 .sitename
 {
   float: left;
@@ -40,7 +53,6 @@ body
   margin-top: 12px;
   padding:10px;
   display: block;
-  height:120px;
   border: 1px solid;
   background-color: #FFF;
 }
@@ -90,21 +102,17 @@ body
 }
 .navlink a:focus
 {
-  background-color: inherit;
-  border-bottom: 3px solid white;
+  border-bottom: 1px solid white;
   border-style: double;
 }
 .navlink a:hover
 {
   cursor: pointer;
   border-bottom: 1px solid white;
-  background-color: inherit;
 }
 .navlink a:active
 {
-  border-bottom: 3px solid white;
-  border-style: double;
-  background-color: inherit;
+  border-bottom: 1px solid white;
 }
 .navlink a
 {
@@ -127,4 +135,9 @@ p
   text-align: center;
   color: black;
   text-decoration: none;
+}
+.rating_box
+{
+  margin-top: 150px;
+  width:auto;
 }

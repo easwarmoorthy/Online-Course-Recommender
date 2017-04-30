@@ -1,19 +1,33 @@
 {% block content%}
-<link rel="stylesheet" type="text/css" href="/static/style2.css" />
-<div class="item">
-<form method="POST" action=''>{% csrf_token %}
-{% for field in form %}
-<p>Review </p>
-<input id = "review" type="text" name="{{field.name}}" value="{{field.form.initial.label.label}}"  />
-{% endfor %}
-<br>
-<p>Rating</p>
-<input type = "radio" name = "rating" id = "checks[]" value="1" checked></input>
-<input type = "radio" name = "rating" id = "checks[]" value="2" ></input>
-<input type = "radio" name = "rating" id = "checks[]" value="3"  ></input>
-<input type = "radio" name = "rating" id = "checks[]" value="4" ></input>
-<input type = "radio" name = "rating" id = "checks[]" value="5" ></input>
-<p class="submit"><input type="submit"></input></p>
-</form>
+<link rel="stylesheet" type="text/css" href="/static/allcourses.css" />
+<link rel="stylesheet" type="text/css" href="/static/style3.css" />
+<div class="top">
+    <div class="sitename">
+    <h2> Course Match </h2>
+    </div>
+    <div class="navlink">
+        <a  href = "/recommendation/" {%if title == "Recommedations" %} class="active" {%endif%}>Recommendations</a>
+      </div>
+      <div class="navlink">
+        <a href = "/all/" {%if title == "Courses"%} class="active" {%endif%} >Courses </a>
+    </div>
+</div>
+<div class="box">
+  <form method="POST" action=''>{% csrf_token %}
+    {% for field in form %}
+    <p>Review </p>
+    <textarea class="review" name="{{field.name}}" value="{{field.form.initial.previous_data.review}}"></textarea>
+    {% endfor %}
+    <p>Rating</p>
+
+    {% for value in "12345" %}
+    <input type = "radio" name = "rating" value= "{{ forloop.counter0 }}" {% if forloop.counter0 == previous_data.rating %}
+    checked
+    {%endif%}> </input>
+    {% endfor %}
+
+    <input class="submit" type="submit"></input>
+
+  </form>
 </div>
 {% endblock content%}

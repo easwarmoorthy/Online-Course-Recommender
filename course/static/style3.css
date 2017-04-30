@@ -1,38 +1,22 @@
-.item
+.box
 {
-  margin:0 auto;
-  width:500px;
-  padding: 20px;
+  margin: 0 auto;
+  width: 480px;;
+  background-color: white;
+  margin-top: 100px;
+  box-sizing: border-box;
+  padding: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .07), 0 0px 8px rgba(0, 0, 0, .14);
 }
-body
+.review
 {
-  background-color:whitesmoke;
 }
-input
+.rating
 {
-  color:#666;
-  border: 1px solid;
-  border-color: #666;
-  background-color: inherit;
-  font-size: 14px;
-  padding: 5px;
-  width:50%;
-  margin-right:50%;
-  margin-bottom: 20px;
+
 }
-input:hover
+input[type = text]
 {
-  color: #333;
-  border-color: #444;
-  border: 1px solid;
-  border-style:double;
-  border-style: dotted;
-}
-input:focus
-{
-  color: #333;
-  border-color: #444;
-  border: 1px solid;
-  border-style:double;
-  border-style: dotted;
+  width: 300px;
+  height: 100px;
 }

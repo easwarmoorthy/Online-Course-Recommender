@@ -9,31 +9,33 @@
 
 <title> CourseMatch </title>
 <body>
+
     <div class="top">
         <div class="sitename">
         <h2> Course Match </h2>
         </div>
         <div class="navlink">
-            <a href = "/recommendation/">Recommendation</a>
+            <a  href = "/recommendation/" {%if title == "Recommedations" %} class="active" {%endif%}>Recommendations</a>
           </div>
           <div class="navlink">
-            <a href = "/all/"> View Courses </a>
+            <a href = "/all/" {%if title == "Courses"%} class="active" {%endif%} >Courses </a>
         </div>
   </div>
+
 <div class="content">
-{% for x in list1%}
-<div class="item">
-  <div class="course_name">
-    <a href="{{x.homepage}}">{{x.title}}</a>
+  {% for x in list1%}
+  <div class="item">
+    <div class="course_name">
+      <a href="{{x.homepage}}">{{x.title}}</a>
+    </div>
+    <div>
+    <p> {{x.short_summary}} </p>
+    </div>
+    <form action="/{{x.id}}/rating/">
+        <input type="submit" value="Add Ratings" />
+    </form>
   </div>
-  <div class="qname">
-  <p> {{x.short_summary}} </p>
-  </div>
-  <form action="/{{x.id}}/rating/">
-      <input type="submit" value="Add Ratings" />
-  </form>
-</div>
-{% endfor %}
+  {% endfor %}
 
 <nav aria-label="Page navigation example">
   <div class="pagination">

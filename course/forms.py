@@ -39,10 +39,10 @@ class UserRegisterForm(forms.ModelForm):
             self.fields[fieldname].help_text = None
 
 class SearchForm(forms.Form):
-    keyword = forms.CharField()
+    keyword = forms.CharField(widget=forms.Textarea)
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
-        self.fields['keyword'].label = "Search by Name"
+        self.fields['keyword'].label = ""
 
 
 """class QuoteForm(forms.ModelForm):

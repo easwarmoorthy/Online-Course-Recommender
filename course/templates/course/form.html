@@ -11,14 +11,21 @@
     <h2> Course Match </h2>
   </div>
     <div class="register">
+      {% if title != "Register" %}
         <form action="/register/">
           <input class = "submit" type="submit" value="Register" />
         </form>
+        {% else %}
+        <form action="/login/">
+          <input class = "submit" type="submit" value="Login" />
+        </form>
+        {%endif%}
     </div>
   </div>
 
   <div class="content">
   <div class="userform">
+    <h3> {{title}} </h3>
     <form method="POST" action=''>{% csrf_token %}
       <div class="userpass">
         <label for="id_username">Username</label>

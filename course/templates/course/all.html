@@ -1,10 +1,17 @@
 {% block content %}
 {% load static %}
-
+<meta name="viewport" content="width=device-width, initial-scale = 1.0">
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/allcourses.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
+$(document).ready(function(){
+    $("button_add").click(function(){
+        $.get("demo_test.asp", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
 </script>
 
 <title> CourseMatch </title>
@@ -12,7 +19,7 @@
 
     <div class="top">
         <div class="sitename">
-        <h2> Course Match </h2>
+        <a href="/all/"> <h2> Course Match </h2> </a>
         </div>
         <div class="navlink">
             <a  href = "/recommendation/" {%if title == "Recommedations" %} class="active" {%endif%}>Recommendations</a>
@@ -21,7 +28,7 @@
             <a href = "/all/" {%if title == "Courses"%} class="active" {%endif%} >Courses </a>
         </div>
         <div class="navlink">
-          <a href = "/login/">Logout </a>
+          <a href = "/logout/">Logout </a>
       </div>
   </div>
 

@@ -1,6 +1,8 @@
 {% block content%}
 <link rel="stylesheet" type="text/css" href="/static/allcourses.css" />
 <link rel="stylesheet" type="text/css" href="/static/style3.css" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+
 <div class="top">
     <div class="sitename">
     <h2> Course Match </h2>
@@ -17,7 +19,7 @@
     {% for field in form %}
     <p>Review </p>
     <div class="review">
-    <input class="review" type="text" name="{{field.name}}" value="{{field.form.initial.previous_data.review}}"  />
+    <input id="review" class="review" type="text" name="{{field.name}}" value="{{field.form.initial.previous_data.review}}"  />
   </div>
     {% endfor %}
     <p>Rating</p>

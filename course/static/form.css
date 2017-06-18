@@ -2,28 +2,28 @@ body
 {
   margin: 0px;
   padding: 0px;
-  color: #FFF;
   font-family: sans-serif;
-  background-color: white;
+  color: white;
 }
-h3
+#formname
 {
-  color:grey;
+  display: block;
+  text-align: center;
+  padding-right: 30px;
+  font-weight: bolder;
+  color: whitesmoke;
 }
 p
 {
   font-size: 20px;
-  color: grey;
 }
 .top
 {
   height: 70px;
-  background-color: black;
 }
 .sitename
 {
   float: left;
-  margin-bottom: 10px;
   color:#02C39A;
   text-shadow: 1px 1px 2px #02C39A;
   padding: 1px 0px 1px 40px;
@@ -34,36 +34,33 @@ p
   margin-right: 50px;
   margin-top: 6px;
 }
-.register input
+body
 {
-  width:120px;
+  background: url('http://codecondo.com/wp-content/uploads/2014/04/12-Courses-for-Starting-Your-Web-Development-Journey.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
 }
 .content
 {
   clear: both;
-  color:black;
-  background-color:inherit;
-  margin-right: 90px;
+  background-color: rgba(13,13,13,0.5);
+  color:white;
+  margin: 0 auto;
   margin-top: 70px;
-  float:right;
   width:250px;
   padding: 30px;
-  border-top: 3px solid black;
-  border-left: 0px;
-  border-right: 0px;
-  border-bottom: 3px solid black;
-  border-style: double;
-  /*background: linear-gradient(to right, #F7F7F7, #F3F3F3);*/
-  box-shadow: 0 0 4px rgba(0, 0, 0, .07), 0 0px 8px rgba(0, 0, 0, .14);
+  border: 1px solid white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 76px -11px rgba(13,13,13,1);
 }
 input,label
 {
   margin: 0 auto;
   display: block;
   margin-top: 10px;
-}
-.userpass
-{
+  outline: none;
 }
 .sub
 {
@@ -71,43 +68,48 @@ input,label
 }
 label
 {
+  color: white;
   font-size: 16px;
+  padding: 10px;
 }
-.userpass input
+input , input[type = submit]
 {
-  width:240px;
-  text-align: left;
-  padding: 5px;
-  background-color: inherit;
-  font-size: 20px;
-  height: 32px;
+  background-color: rgba(13,13,13,0.5);
+  box-sizing: border-box;
+  color: white;
+  margin: 0 auto;
+  height: 40px;
+  width: 200px;
+  padding: 10px;
   border: 1px solid;
-  /*
-  border: 2px solid white ;
-  border-radius: 5px;
-  */
+  border-radius: 3px;
+  border-color: white;
 }
-.userpass input:focus
+input:focus,input:hover
 {
-  background-color: inherit;
-}
-.userpass input:active
-{
-  background-color: inherit;
+  background-color: rgba(13,13,13,0.5);
 }
 input:-webkit-autofill {
+    background-color: inherit;
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    opacity: 0.5;
 }
 input[type = submit]
 {
+  width: 90px;
   text-align: center;
-  padding: 5px;
-  background-color: #02C39A;
   font-size: 18px;
-  border:1px solid black;
-  box-shadow: 0 0 4px rgba(0, 0, 0, .07), 0 0px 8px rgba(0, 0, 0, .14);
-
+  box-shadow: 0px 0px 76px -11px rgba(13,13,13,1);
+  background-color: rgba(13,13,13,0.5);
+  color: white;
 }
-#register
+input[type = submit]:focus , input[type = submit]:hover
 {
+  border-color: grey;
+  background-color: rgba(1,1,1,0.5);
+  color: grey;
+}
+.userpass li
+{
+  list-style-type: none;
 }

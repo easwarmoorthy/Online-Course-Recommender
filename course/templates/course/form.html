@@ -12,25 +12,27 @@
   </div>
     <div class="register">
       {% if title != "Register" %}
-        <form action="/register/">
-          <input class = "submit" type="submit" value="Register" />
+        <form action="/register">
+          <input type="submit" value="Register" />
         </form>
         {% else %}
-        <form action="/login/">
-          <input class = "submit" type="submit" value="Login" />
+        <form action="/login">
+          <input type="submit" value="Login" />
         </form>
         {%endif%}
     </div>
   </div>
-
+<div class="space">
   <div class="content">
   <div class="userform">
-    <h3> {{title}} </h3>
+    <div id="formname"> {{title}} </div>
     <form method="POST" action=''>{% csrf_token %}
       <div class="userpass">
         <label for="id_username">Username</label>
+        <div> {{ form.non_field_errors }}{{ form.username.errors }} </div>
         <input class="input-name" id="id_username" maxlength="16" name="username" type="text" required="">
         <label for="id_password">Password</label>
+        <div> {{ form.password.errors }} </div>
         <input class="input-name" id="id_password" name="password" type="password" required="">
     </div>
     <div class="sub">
@@ -38,7 +40,7 @@
     </div>
     </form>
   </div>
-
+</div>
 
 </div>
 </body>

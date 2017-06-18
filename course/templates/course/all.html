@@ -3,17 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale = 1.0">
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/allcourses.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("button_add").click(function(){
-        $.get("demo_test.asp", function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });
-    });
-});
-</script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
 <title> CourseMatch </title>
 <body>
 
@@ -32,6 +24,9 @@ $(document).ready(function(){
       </div>
   </div>
 
+  <a id="page-help" href="rating.html" >what is this?</a>
+  <div></div>
+
 <div class="content">
   {% for x in list1%}
   <div class="item">
@@ -41,12 +36,11 @@ $(document).ready(function(){
     <div>
     <p> {{x.short_summary}} </p>
     </div>
-    <form action="/{{x.id}}/rating/">
+    <form action="/{{x.id}}/rating/" class="userd">
         <input type="submit" value="Add Ratings" />
     </form>
   </div>
   {% endfor %}
-
 <nav aria-label="Page navigation example">
   <div class="pagination">
     {% if list1.has_previous %}

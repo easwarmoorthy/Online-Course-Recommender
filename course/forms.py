@@ -18,11 +18,7 @@ class UserLoginForm(forms.Form):
         if username and password:
             user = authenticate(username=username,password=password)
             if not user:
-                raise forms.ValidationError("User Not Exist")
-            if not user.check_password(password):
-                raise forms.ValidationError("Incorrect Password")
-            if not user.is_active:
-                raise forms.ValidationError("User Not Active")
+                raise forms.ValidationError("User Name or Password is Incorrect")
         return super(UserLoginForm,self).clean(*args,**kwargs)
 
 class UserRegisterForm(forms.ModelForm):

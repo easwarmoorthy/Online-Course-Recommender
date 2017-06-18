@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from math import sqrt
+from django.views.generic import TemplateView
 from django.contrib.auth import(
 	authenticate,
 	get_user_model,
@@ -105,16 +106,19 @@ def login_view(request):
 	form = UserLoginForm(request.POST or None)
 	title = "Login"
 	context = {"form":form ,"title":title}
-	if form.is_valid():
-		username = form.cleaned_data.get("username")
-		password = form.cleaned_data.get("password")
-		user = authenticate(username=username,password=password)
-		login(request,user)
-		request.session['member_id'] = user.id
-		if user.is_authenticated():
-			return HttpResponseRedirect('/all/')
-		else:
-			return render(request, "course/form.html", context)
+	if check_login(request):
+		return HttpResponseRedirect('/all/')
+	else:
+		if form.is_valid():
+			username = form.cleaned_data.get("username")
+			password = form.cleaned_data.get("password")
+			user = authenticate(username=username,password=password)
+			login(request,user)
+			request.session['member_id'] = user.id
+			if user.is_authenticated():
+				return HttpResponseRedirect('/all/')
+			else:
+				return render(request, "course/form.html", context)
 	return render(request, "course/form.html", context)
 
 def edit_view(userkey,pk):
@@ -135,9 +139,9 @@ def edit_view(userkey,pk):
 		pass
 	return edit,previous_data
 
-def check_login(userkey):
+def check_login(request):
 	try:
-		if userkey:
+		if request.session['member_id']:
 			return True
 	except KeyError:
 		return False
@@ -165,7 +169,7 @@ def rating_view(request,pk):
 	userkey,rating,edit = request.session['member_id'],request.POST.get("rating"),False
 	edit,previous_data = edit_view(userkey,pk) #checks whether to edit or new form
 	searchform = SearchForm(request.POST or None,initial = { 'previous_data':previous_data})
-	if check_login(userkey): #checks whether the user is Logged in
+	if check_login(request): #checks whether the user is Logged in
 		if searchform.is_valid():
 			keyword = searchform.cleaned_data.get("keyword")
 			if not edit:
@@ -228,5 +232,4 @@ def logout_view(request):
 		del request.session['member_id']
 	except KeyError:
 		pass
-	form = "Logged out successfully"
-	return render(request,"/login/",{"form":form})
+	return HttpResponseRedirect('/login')
